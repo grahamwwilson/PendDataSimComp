@@ -235,9 +235,14 @@ print('chisqU ',chisqU)
 print('chisqD ',chisqD)
 ndof=2*data_tvalue_U.size
 print('chisqt ',chisqU+chisqD,'ndof = ',ndof,'chisq/ndof= ',(chisqU+chisqD)/ndof)
+
 # Overall total
 chisqtot = chisqSU+chisqSD+chisqU+chisqD
+print('Result for simfile ',simfile)
+print(' ------------------------------------------------------------------------')
 print('chisqTOT ',chisqtot,'chisq/ndof= ',chisqtot/(2.0*float(ndof)))
+print(' ------------------------------------------------------------------------')
+print(' ')
 
 # Plot the data with assigned errors
 plt.figure(1)  
