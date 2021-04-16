@@ -100,6 +100,7 @@ data_tshadow_D_event=np.empty(data_type_D.size//2)
 data_tshadow_U=np.empty(data_type_U.size//2)
 data_tvalue_U=np.empty(data_type_U.size//2)
 data_tshadow_U_event=np.empty(data_type_U.size//2)
+data_Q=np.empty(data_type_D.size//2)
 gen_err_D=np.empty(data_type_D.size//2)
 gen_err_U=np.empty(data_type_U.size//2)
 for i in range(0, data_type_D.size//2):
@@ -112,6 +113,11 @@ for i in range(0, data_type_U.size//2):
     data_tvalue_U[i] = 0.5*DTCLOCKU*(data_clockticks_U[2*i] + data_clockticks_U[2*i+1])
     data_tshadow_U_event[i] = 0.5*(data_event_U[2*i] + data_event_U[2*i+1])
     gen_err_U[i] = 5.0*DTCLOCKU
+for i in range(1, data_type_D.size//2 - 1):
+    E1 = 1.0/data_tshadow_D[i]**2
+    E0 = 1.0/data_tshadow_D[i-1]**2
+    E2 = 1.0/data_tshadow_D[i+1]**2
+    data_Q[i] = 2.0*np.pi*E1/(E0-E2)
 # Now arrays with periods
 data_halfperiod_D=np.empty(data_type_D.size//2)
 for i in range(0, data_type_D.size//2):
@@ -135,6 +141,7 @@ sim_tshadow_D_event=np.empty(sim_type_D.size//2)
 sim_tshadow_U=np.empty(sim_type_U.size//2)
 sim_tvalue_U=np.empty(sim_type_U.size//2)
 sim_tshadow_U_event=np.empty(sim_type_U.size//2)
+sim_Q=np.empty(data_type_D.size//2)
 for i in range(0, sim_type_D.size//2):
     sim_tshadow_D[i] = DTCLOCKD*(sim_clockticks_D[2*i+1] - sim_clockticks_D[2*i])
     sim_tvalue_D[i] = 0.5*DTCLOCKD*(sim_clockticks_D[2*i] + sim_clockticks_D[2*i+1])
@@ -143,6 +150,11 @@ for i in range(0, sim_type_U.size//2):
     sim_tshadow_U[i] = DTCLOCKU*(sim_clockticks_U[2*i+1] - sim_clockticks_U[2*i])
     sim_tvalue_U[i] = 0.5*DTCLOCKU*(sim_clockticks_U[2*i] + sim_clockticks_U[2*i+1])
     sim_tshadow_U_event[i] = 0.5*(sim_event_U[2*i] + sim_event_U[2*i+1])
+for i in range(1, data_type_D.size//2 - 1):
+    E1 = 1.0/sim_tshadow_D[i]**2
+    E0 = 1.0/sim_tshadow_D[i-1]**2
+    E2 = 1.0/sim_tshadow_D[i+1]**2
+    sim_Q[i] = 2.0*np.pi*E1/(E0-E2)
 # Now arrays with periods
 sim_halfperiod_D=np.empty(sim_type_D.size//2)
 for i in range(0, sim_type_D.size//2):
@@ -197,8 +209,11 @@ for i in range(0, data_type_D.size//4):
     data_pdeltat_DU[i] = 0.5*(data_deltat_DU[2*i] + data_deltat_DU[2*i+1])
     sim_pdeltat_DU[i] = 0.5*(sim_deltat_DU[2*i] + sim_deltat_DU[2*i+1])
 
-print(data_tvalue_D-data_tvalue_U)
-print(sim_tvalue_D-sim_tvalue_U)
+#print(data_tvalue_D-data_tvalue_U)
+#print(sim_tvalue_D-sim_tvalue_U)
+print(data_Q)
+print(sim_Q)
+print(data_Q-sim_Q)
 
 # Plot the data with assigned errors
 plt.figure(1)  
