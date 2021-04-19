@@ -48,4 +48,11 @@ errorbar(data.tvalueD(),data.deltatDU(),color='green',linewidth=2, label=r'Data 
 errorbar(sim.tvalueD(),sim.deltatDU(),color='black',linewidth=2, label=r'Sim D/U Time Diff')
 plt.legend()
 
+plt.figure(5)
+errorbar(data.evalueU(),data.QvalueU(),color='cyan',linewidth=2, label=r'Data Qvalue (U)')
+errorbar(sim.evalueU(),sim.QvalueU(),color='magenta',linewidth=2, label=r'Sim Qvalue (U)')
+errorbar(data.evalueD(),data.QvalueD(),color='blue',linewidth=2, label=r'Data Qvalue (D)')
+errorbar(sim.evalueD(),sim.QvalueD(),color='red',linewidth=2, label=r'Sim Qvalue (D)')
+plt.legend()
+
 plt.show()

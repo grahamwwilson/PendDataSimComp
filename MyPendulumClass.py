@@ -80,6 +80,22 @@ class PendulumDataSet:
             tvalueD[i] = 0.5*DTCLOCKD*(clockticksD[2*i+1] + clockticksD[2*i])
         return tvalueD
 
+    def evalueD(self):
+        N = self.ttypeD().size//2
+        evalueD = np.empty(N)
+        eventD = self.eventD()
+        for i in range(0,N):
+            evalueD[i] = 0.5*(eventD[2*i+1] + eventD[2*i])
+        return evalueD
+
+    def evalueU(self):
+        N = self.ttypeU().size//2
+        evalueU = np.empty(N)
+        eventU = self.eventU()
+        for i in range(0,N):
+            evalueU[i] = 0.5*(eventU[2*i+1] + eventU[2*i])
+        return evalueU
+
     def QvalueD(self):
         tshadowD = self.tshadowD()
         N = tshadowD.size
