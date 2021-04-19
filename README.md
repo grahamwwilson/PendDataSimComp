@@ -2,8 +2,10 @@
 
 Contains 3 programs.
 
-python ClassyPlots.py                Recommended starting point
+python ClassyPlots.py               Recommended starting point
+
 python DataSimCompPlots.py          Previous more procedural code
+
 python ChiSquaredCalculation.py     Previous initial implementation
 
 Makes a number of plots comparing a particular simulation 
