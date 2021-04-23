@@ -7,21 +7,28 @@ from MyPendulumClass import PendulumDataSet
 # Rewrite code using a class that hides all the array manipulations etc.
 # Code currently still needs some time offsets etc included.
 
+NTOSKIP=104   # Number of transitions to skip at start of each PendulumDataSet
+              # With this set to 104, we skip the first 13 oscillations (13*8 = 104) measurements.
+
 # Read data from Simulation data-file into numpy array format
 simfile='SimDataFile-55.dat'
-sim = PendulumDataSet(simfile)
+sim = PendulumDataSet(simfile,NTOSKIP)
 
 # Read data from reformatted data-file for Run 76 into numpy array format
 #datafile='DataSummaryFile-Run76-Shortened.dat'
 datafile='DataSummaryFile-Run76-LessShort.dat'
-data = PendulumDataSet(datafile)
+data = PendulumDataSet(datafile,NTOSKIP)
 
-print('sim.tshadowD():',sim.tshadowD())
-print('data.tshadowD():',data.tshadowD())
-print('sim.tvalueD():',sim.tvalueD())
-print('data.tvalueD():',data.tvalueD())
-print('sim.QvalueD():',sim.QvalueD())
-print('data.QvalueD():',data.QvalueD())
+#print(sim.event())
+#print('sim.tshadowD():',sim.tshadowD())
+#print('data.tshadowD():',data.tshadowD())
+#print('sim.tvalueD():',sim.tvalueD())
+#print('data.tvalueD():',data.tvalueD())
+#print('sim.QvalueD():',sim.QvalueD())
+#print('data.QvalueD():',data.QvalueD())
+#print('sim.QvalueU():',sim.QvalueU())
+#print('data.QvalueU():',data.QvalueU())
+#print(sim.tshadowD().size)
 
 plt.figure(1)
 errorbar(data.tvalueU(),data.tshadowU(),color='cyan',linewidth=2, label=r'Data tshadow (U)')

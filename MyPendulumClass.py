@@ -8,20 +8,21 @@ CLOCK_OFFSET_U = int(CLOCK_OFFSET_D*DTCLOCKD/DTCLOCKU) - DTUD
 
 class PendulumDataSet:
 # PendulumDataSet class defined using the input file
-    def __init__(self, ifile):
+    def __init__(self, ifile, ntoskip=0):
         self.ifile = ifile
+        self.ntoskip = ntoskip
 
     def ttype(self):
 # transition type (U/D)
-        return np.genfromtxt(self.ifile, usecols=0, unpack=True, dtype=str)
+        return np.genfromtxt(self.ifile, usecols=0, skip_header=self.ntoskip+1, unpack=True, dtype=str)
 
     def event(self):
 # event number
-        return np.genfromtxt(self.ifile, usecols=1, unpack=True, dtype=int)
+        return np.genfromtxt(self.ifile, usecols=1, skip_header=self.ntoskip+1, unpack=True, dtype=int)
 
     def clockticks(self):
 # clock ticks
-        return np.genfromtxt(self.ifile, usecols=2, unpack=True, dtype=int)
+        return np.genfromtxt(self.ifile, usecols=2, skip_header=self.ntoskip+1, unpack=True, dtype=int)
 
 # Set up list with indices of the 'U' event types
     def ulist(self):
