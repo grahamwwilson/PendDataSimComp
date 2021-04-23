@@ -96,6 +96,13 @@ class PendulumDataSet:
             evalueU[i] = 0.5*(eventU[2*i+1] + eventU[2*i])
         return evalueU
 
+    def errQ(self):
+        N = self.ttypeU().size//2
+        errQ = np.empty(N)
+        for i in range(0,N):
+            errQ[i] = 5.0
+        return errQ
+
     def QvalueD(self):
         tshadowD = self.tshadowD()
         N = tshadowD.size

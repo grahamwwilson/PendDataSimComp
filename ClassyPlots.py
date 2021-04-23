@@ -8,11 +8,12 @@ from MyPendulumClass import PendulumDataSet
 # Code currently still needs some time offsets etc included.
 
 # Read data from Simulation data-file into numpy array format
-simfile='SimDataFile-48.dat'
+simfile='SimDataFile-55.dat'
 sim = PendulumDataSet(simfile)
 
 # Read data from reformatted data-file for Run 76 into numpy array format
-datafile='DataSummaryFile-Run76-Shortened.dat'
+#datafile='DataSummaryFile-Run76-Shortened.dat'
+datafile='DataSummaryFile-Run76-LessShort.dat'
 data = PendulumDataSet(datafile)
 
 print('sim.tshadowD():',sim.tshadowD())
@@ -50,9 +51,13 @@ plt.legend()
 
 plt.figure(5)
 errorbar(data.evalueU(),data.QvalueU(),color='cyan',linewidth=2, label=r'Data Qvalue (U)')
+errorbar(data.evalueU(),data.QvalueU(),data.errQ(),fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
 errorbar(sim.evalueU(),sim.QvalueU(),color='magenta',linewidth=2, label=r'Sim Qvalue (U)')
+errorbar(sim.evalueU(),sim.QvalueU(),sim.errQ(),fmt="o",color='magenta',solid_capstyle='projecting',capsize=0,markersize=4)
 errorbar(data.evalueD(),data.QvalueD(),color='blue',linewidth=2, label=r'Data Qvalue (D)')
+errorbar(data.evalueD(),data.QvalueD(),data.errQ(),fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
 errorbar(sim.evalueD(),sim.QvalueD(),color='red',linewidth=2, label=r'Sim Qvalue (D)')
+errorbar(sim.evalueD(),sim.QvalueD(),sim.errQ(),fmt="o",color='red',solid_capstyle='projecting',capsize=0,markersize=4)
 plt.legend()
 
 plt.show()
