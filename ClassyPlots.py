@@ -19,17 +19,6 @@ sim = PendulumDataSet(simfile,NTOSKIP)
 datafile='DataSummaryFile-Run76-LessShort.dat'
 data = PendulumDataSet(datafile,NTOSKIP)
 
-#print(sim.event())
-#print('sim.tshadowD():',sim.tshadowD())
-#print('data.tshadowD():',data.tshadowD())
-#print('sim.tvalueD():',sim.tvalueD())
-#print('data.tvalueD():',data.tvalueD())
-#print('sim.QvalueD():',sim.QvalueD())
-#print('data.QvalueD():',data.QvalueD())
-#print('sim.QvalueU():',sim.QvalueU())
-#print('data.QvalueU():',data.QvalueU())
-#print(sim.tshadowD().size)
-
 plt.figure(1)
 errorbar(data.tvalueU(),data.tshadowU(),color='cyan',linewidth=2, label=r'Data tshadow (U)')
 errorbar(sim.tvalueU(),sim.tshadowU(),color='magenta',linewidth=2, label=r'Sim tshadow (U)')
