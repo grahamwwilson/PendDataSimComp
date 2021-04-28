@@ -8,21 +8,29 @@ CLOCK_OFFSET_U = int(CLOCK_OFFSET_D*DTCLOCKD/DTCLOCKU) - DTUD
 
 class PendulumDataSet:
 # PendulumDataSet class defined using the input file
-    def __init__(self, ifile, ntoskip=0):
+    def __init__(self, ifile, ntoskip=0, max_rows=None):
         self.ifile = ifile
-        self.ntoskip = ntoskip
+        self.ntoskip = ntoskip     # Number of lines to skip at the start of the file (to avoid noisy data)
+        self.max_rows = max_rows   # Maximum number of rows to read (after skipping the number specified)
 
     def ttype(self):
 # transition type (U/D)
-        return np.genfromtxt(self.ifile, usecols=0, skip_header=self.ntoskip+1, unpack=True, dtype=str)
+        return np.genfromtxt(self.ifile, usecols=0, skip_header=self.ntoskip+1, max_rows=self.max_rows, unpack=True, dtype=str)
 
     def event(self):
 # event number
-        return np.genfromtxt(self.ifile, usecols=1, skip_header=self.ntoskip+1, unpack=True, dtype=int)
+        return np.genfromtxt(self.ifile, usecols=1, skip_header=self.ntoskip+1, max_rows=self.max_rows, unpack=True, dtype=int)
 
     def clockticks(self):
 # clock ticks
-        return np.genfromtxt(self.ifile, usecols=2, skip_header=self.ntoskip+1, unpack=True, dtype=int)
+        return np.genfromtxt(self.ifile, usecols=2, skip_header=self.ntoskip+1, max_rows=self.max_rows, unpack=True, dtype=int)
+
+    def summary(self):
+# Print summary information for this PendulumDataSet
+        print("Size of PendulumDataSet ",self.ifile,'is',self.clockticks().size)
+
+    def size(self):
+        return int(self.clockticks().size)
 
 # Set up list with indices of the 'U' event types
     def ulist(self):
@@ -97,6 +105,14 @@ class PendulumDataSet:
             evalueU[i] = 0.5*(eventU[2*i+1] + eventU[2*i])
         return evalueU
 
+    def evalueUU(self):
+        N = self.ttypeU().size//4
+        evalueUU = np.empty(N)
+        eventU = self.eventU()
+        for i in range(0,N):
+            evalueUU[i] = 0.25*(eventU[2*i+1] + eventU[2*i]+eventU[2*i+3] + eventU[2*i+2])
+        return evalueUU
+
     def errQ(self):
         N = self.ttypeU().size//2
         errQ = np.empty(N)
@@ -133,6 +149,15 @@ class PendulumDataSet:
         for i in range(0,N):
             tshadowU[i] = DTCLOCKU*(clockticksU[2*i+1] - clockticksU[2*i])
         return tshadowU
+
+    def tdiffU(self):               # time between
+        N = self.ttypeU().size//4
+        tdiffU = np.empty(N)
+        clockticksU = self.clockticksU()
+        for i in range(0,N-1):
+            tdiffU[i] = DTCLOCKU*(clockticksU[4*i+4] - clockticksU[4*i+3])
+        tdiffU[N-1] = 0.0
+        return tdiffU
 
     def tvalueU(self):
         N = self.ttypeU().size//2

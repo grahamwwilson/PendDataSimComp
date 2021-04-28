@@ -8,16 +8,22 @@ from MyPendulumClass import PendulumDataSet
 # Code currently still needs some time offsets etc included.
 
 NTOSKIP=104   # Number of transitions to skip at start of each PendulumDataSet
-              # With this set to 104, we skip the first 13 oscillations (13*8 = 104) measurements.
-
-# Read data from Simulation data-file into numpy array format
-simfile='SimDataFile-55.dat'
-sim = PendulumDataSet(simfile,NTOSKIP)
+              # With this set to 104, we skip the first 13 oscillations with 13*8 = 104 measurements.
 
 # Read data from reformatted data-file for Run 76 into numpy array format
 #datafile='DataSummaryFile-Run76-Shortened.dat'
 datafile='DataSummaryFile-Run76-LessShort.dat'
 data = PendulumDataSet(datafile,NTOSKIP)
+data.summary()
+NDATA = data.size()
+print('NDATA',NDATA)
+
+# Read data from Simulation data-file into numpy array format
+#simfile='SimDataFile-55.dat'
+simfile='SimDataFile-101.dat.gz'
+#sim = PendulumDataSet(simfile,NTOSKIP,NDATA)  #Only read at most NDATA rows from simulation
+sim = PendulumDataSet(simfile,NTOSKIP)
+sim.summary()
 
 plt.figure(1)
 errorbar(data.tvalueU(),data.tshadowU(),color='cyan',linewidth=2, label=r'Data tshadow (U)')
@@ -54,6 +60,18 @@ errorbar(data.evalueD(),data.QvalueD(),color='blue',linewidth=2, label=r'Data Qv
 errorbar(data.evalueD(),data.QvalueD(),data.errQ(),fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
 errorbar(sim.evalueD(),sim.QvalueD(),color='red',linewidth=2, label=r'Sim Qvalue (D)')
 errorbar(sim.evalueD(),sim.QvalueD(),sim.errQ(),fmt="o",color='red',solid_capstyle='projecting',capsize=0,markersize=4)
+plt.legend()
+
+#print('sim',sim.tdiffU().size,sim.tdiffU())
+#print('data',data.tdiffU().size,data.tdiffU())
+#print('sim',sim.evalueUU().size,)
+#print('data',data.evalueUU().size)
+
+plt.figure(6)
+errorbar(data.evalueUU(),data.tdiffU(),color='cyan',linewidth=2, label=r'Data Tdiff (U)')
+#errorbar(data.evalueU(),data.QvalueU(),data.errQ(),fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
+errorbar(sim.evalueUU(),sim.tdiffU(),color='magenta',linewidth=2, label=r'Sim Tdiff (U)')
+#errorbar(sim.evalueU(),sim.QvalueU(),sim.errQ(),fmt="o",color='magenta',solid_capstyle='projecting',capsize=0,markersize=4)
 plt.legend()
 
 plt.show()
