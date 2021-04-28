@@ -1,8 +1,10 @@
 # PendDataSimComp
 
-Contains 3 programs.
+Contains 4 programs.
 
-python ClassyPlots.py               Recommended starting point
+python Comparisons.py               Recommended starting point
+
+python ClassyPlots.py               Previous initial OO implementation
 
 python DataSimCompPlots.py          Previous more procedural code
 
@@ -26,3 +28,7 @@ Refactored 4-18-2021 to hide all the methods in MyPendulumClass.py
 and use a more object oriented way to do the plots. Still a work in 
 progress, but illustrative code is in ClassyPlots.py.
 Plan to incorporate the chi-squared calculations in a similar way.
+
+Refactored again, 4-28-2021. Now suggest starting from 
+python Comparisons.py. Now the chi-squared and plot methods are in 
+the MyComparisonClass.py.
