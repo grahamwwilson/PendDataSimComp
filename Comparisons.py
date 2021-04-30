@@ -26,6 +26,10 @@ sim = PendulumDataSet(simfile,NTOSKIP,NDATA)  # Only read at most NDATA rows fro
 c = Comparison(data,sim)                      # Make a comparison object with the data and sim data-sets
 c.summary()
 
+# First check new methods from Casey
+data.checksizes()
+sim.checksizes()
+
 # Make tuples with quantities for chi-squared calculations
 function_tuple = 'QvalueU','QvalueD','tshadowU','tshadowD', 'tdiffU', 'deltatDU'  # function names
 err_tuple      =       5.0,     5.0,     2.0e-4,    2.0e-4,  2.0e-3 ,    2.0e-3   # assigned errors
@@ -44,4 +48,7 @@ c.plot3e(2.0e-4)  # Shadow times for U/D using event number for x-axis
 c.plot4e(5.0)     # Q values for U/D using event number for x-axis
 c.plot5f(2.0e-3)  # D/U time difference using event number for x-axis
 c.plot6f(2.0e-3)  # Extremum time difference (U) using event number for x-axis
+c.plot7f(1.0e-3)  # Half-period asymmetry (U) using event number for x-axis
+c.plot8f(1.0e-3)  # Half-period asymmetry (D) using event number for x-axis
+c.plot9e(1.0e-4)  # Periods
 plt.show()

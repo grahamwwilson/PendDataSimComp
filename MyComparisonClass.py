@@ -196,3 +196,72 @@ class Comparison:
         plt.grid(True)
         plt.legend()
         print('plot6f, N=',N)
+
+    def plot7f(self,err):
+# Include errors
+        d = self.datads
+        s = self.simds
+        N = d.AhperiodU().size
+        errU = np.empty(N)
+        for i in range(0,N):
+            errU[i] = err 
+        plt.figure(207)
+        errorbar(d.evalueUU(),d.AhperiodU(),color='cyan',linewidth=2, label=r'Data Half-Period Asymmetry (U)')
+        errorbar(d.evalueUU(),d.AhperiodU(),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.evalueUU(),s.AhperiodU(),color='magenta',linewidth=2, label=r'Sim Half-Period Asymmetry (U)')
+        title('Run 76')
+        xlabel('Event Number')
+        ylabel('Half-Period Asymmetry [%]')
+        plt.grid(True)
+        plt.legend()
+        print('plot7f, N=',N)
+
+    def plot8f(self,err):
+# Include errors
+        d = self.datads
+        s = self.simds
+        N = d.AhperiodD().size
+        errD = np.empty(N)
+        for i in range(0,N):
+            errD[i] = err 
+        plt.figure(208)
+        errorbar(d.evalueDD(),d.AhperiodD(),color='blue',linewidth=2, label=r'Data Half-Period Asymmetry (D)')
+        errorbar(d.evalueDD(),d.AhperiodD(),errD,fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.evalueDD(),s.AhperiodD(),color='red',linewidth=2, label=r'Sim Half-Period Asymmetry (D)')
+        title('Run 76')
+        xlabel('Event Number')
+        ylabel('Half-Period Asymmetry [%]')
+        plt.grid(True)
+        plt.legend()
+        print('plot8f, N=',N)
+
+    def plot9e(self,err):
+# Include errors
+        d = self.datads
+        s = self.simds
+        periodU = d.periodU()
+        N = periodU.size
+        errU = np.empty(N)
+        for i in range(0,N):
+            errU[i] = err 
+        plt.figure(109)
+        errorbar(d.evalueUU(),d.periodU(),color='cyan',linewidth=2, label=r'Data Period (U)')
+        errorbar(d.evalueUU(),d.periodU(),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.evalueUU(),s.periodU(),color='magenta',linewidth=2, label=r' Sim Period (U)')
+        errorbar(d.evalueDD(),d.periodD(),color='blue',linewidth=2, label=r'Data Period (D)')
+        errorbar(d.evalueDD(),d.periodD(),errU,fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.evalueDD(),s.periodD(),color='red',linewidth=2, label=r' Sim Period (D)')
+        title('Run 76')
+        xlabel('Event Number')
+        ylabel('Period [s]')
+        plt.grid(True)
+        plt.legend()
+        print('plot9e, N=',N)
+
+
+
+
+
+
+
+

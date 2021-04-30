@@ -97,6 +97,14 @@ class PendulumDataSet:
             evalueD[i] = 0.5*(eventD[2*i+1] + eventD[2*i])
         return evalueD
 
+    def evalueDD(self):
+        N = self.ttypeD().size//4
+        evalueDD = np.empty(N)
+        eventD = self.eventD()
+        for i in range(0,N):
+            evalueDD[i] = 0.25*(eventD[2*i+1] + eventD[2*i]+eventD[2*i+3] + eventD[2*i+2])
+        return evalueDD
+
     def evalueU(self):
         N = self.ttypeU().size//2
         evalueU = np.empty(N)
@@ -197,4 +205,48 @@ class PendulumDataSet:
         for i in range(0,N):
             deltatDU[i] = abs(tvalueD[i] - tvalueU[i])
         return deltatDU
+
+    def periodU(self):
+        halfperiodU = self.halfperiodU()
+        N = halfperiodU.size//2
+        periodU = np.empty(N)
+        for i in range (0,N):
+            periodU[i] = halfperiodU[2*i] + halfperiodU[2*i+1]
+        return periodU
+
+    def AhperiodU(self):
+        halfperiodU = self.halfperiodU()
+        periodU = self.periodU()
+        N = halfperiodU.size//2
+        AhperiodU = np.empty(N)
+        for i in range (0,N):
+            AhperiodU[i] = 100.0*(halfperiodU[2*i+1] - halfperiodU[2*i])/(halfperiodU[2*i+1] + halfperiodU[2*i])
+        return AhperiodU
+
+    def periodD(self):
+        halfperiodD = self.halfperiodD()
+        N = halfperiodD.size//2
+        periodD = np.empty(N)
+        for i in range (0,N):
+            periodD[i] = halfperiodD[2*i] + halfperiodD[2*i+1]
+        return periodD
+
+    def AhperiodD(self):
+        halfperiodD = self.halfperiodD()
+        periodD = self.periodD()
+        N = halfperiodD.size//2
+        AhperiodD = np.empty(N)
+        for i in range (0,N):
+            AhperiodD[i] = 100.0*(halfperiodD[2*i+1] - halfperiodD[2*i])/(halfperiodD[2*i+1] + halfperiodD[2*i])
+        return AhperiodD
+
+    def checksizes(self):
+# Print summary information of the sizes of all arrays
+         print('Size of event is ',self.event().size)
+         print('Size of periodU is ',self.periodU().size)
+         print('Size of AhperiodU is ',self.AhperiodU().size)
+         print('Size of evalueUU is ',self.evalueUU().size)
+         print('Size of periodD is ',self.periodD().size)
+         print('Size of AhperiodD is ',self.AhperiodD().size)
+         print('Size of evalueDD is ',self.evalueDD().size)
 
