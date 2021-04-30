@@ -51,4 +51,5 @@ c.plot6f(2.0e-3)  # Extremum time difference (U) using event number for x-axis
 c.plot7f(1.0e-3)  # Half-period asymmetry (U) using event number for x-axis
 c.plot8f(1.0e-3)  # Half-period asymmetry (D) using event number for x-axis
 c.plot9e(1.0e-4)  # Periods
+c.plot9g(1.0e-4)  # Periods
 plt.show()

@@ -258,10 +258,28 @@ class Comparison:
         plt.legend()
         print('plot9e, N=',N)
 
+    def plot9g(self,err):
+# Include errors
+        d = self.datads
+        s = self.simds
+        Nd = d.periodU().size
+        Ns = s.periodU().size
 
-
-
-
-
-
+        errU = np.empty(Nd)
+        for i in range(0,Nd):
+            errU[i] = err 
+        plt.figure(309)
+# use generic x-axes based on size of array
+        errorbar(d.genx(Nd),d.periodU(),color='cyan',linewidth=2, label=r'Data Period (U)')
+        errorbar(d.genx(Nd),d.periodU(),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.periodU(),color='magenta',linewidth=2, label=r' Sim Period (U)')
+        errorbar(d.genx(Nd),d.periodD(),color='blue',linewidth=2, label=r'Data Period (D)')
+        errorbar(d.genx(Nd),d.periodD(),errU,fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.periodD(),color='red',linewidth=2, label=r' Sim Period (D)')
+        title('Run 76')
+        xlabel('Measurement Number')
+        ylabel('Period [s]')
+        plt.grid(True)
+        plt.legend()
+        print('plot9g, Nd=',Nd,'Ns=',Ns)
 

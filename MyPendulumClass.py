@@ -249,4 +249,13 @@ class PendulumDataSet:
          print('Size of periodD is ',self.periodD().size)
          print('Size of AhperiodD is ',self.AhperiodD().size)
          print('Size of evalueDD is ',self.evalueDD().size)
+   
+    def genx(self,N):
+# Make generic numpy array for x-axes ranging from [0, N-1] for use in plots
+        genx = np.empty(N)
+        for i in range (0,N):
+            genx[i] = i
+        return genx
+
+
 
