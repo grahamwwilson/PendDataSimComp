@@ -52,4 +52,9 @@ c.plot7f(1.0e-3)  # Half-period asymmetry (U) using event number for x-axis
 c.plot8f(1.0e-3)  # Half-period asymmetry (D) using event number for x-axis
 c.plot9e(1.0e-4)  # Periods
 c.plot9g(1.0e-4)  # Periods
+c.plot10g(1.0e-4)  # Periods (U for each phase)
+c.plot11g(1.0e-4)  # Periods (D for each phase)
 plt.show()
+
+#print(data.PeriodU(0))
+

@@ -73,6 +73,40 @@ class PendulumDataSet:
 
 # Now finally we can define the methods that return the arrays that 
 # we're more interested in
+    def tD(self):
+        N = self.ttypeD().size
+        tD = np.empty(N)
+        clockticksD = self.clockticksD()
+        for i in range(0,N):
+            tD[i] = DTCLOCKD*clockticksD[i]
+        return tD
+
+    def tU(self):
+        N = self.ttypeU().size
+        tU = np.empty(N)
+        clockticksU = self.clockticksU()
+        for i in range(0,N):
+            tU[i] = DTCLOCKU*clockticksU[i]
+        return tU
+
+    def PeriodD(self,iphase):
+# Need iphase to be 0, 1, 2 or 3.
+        n = self.tD().size//4
+        tD = self.tD()
+        PeriodD = np.empty(n-1)
+        for i in range(0,n-1):
+            PeriodD[i] = tD[4*(i+1)+iphase] - tD[4*i+iphase]
+        return PeriodD
+
+    def PeriodU(self,iphase):
+# Need iphase to be 0, 1, 2 or 3.
+        n = self.tU().size//4
+        tU = self.tU()
+        PeriodU = np.empty(n-1)
+        for i in range(0,n-1):
+            PeriodU[i] = tU[4*(i+1)+iphase] - tU[4*i+iphase]
+        return PeriodU
+
     def tshadowD(self):
         N = self.ttypeD().size//2
         tshadowD = np.empty(N)

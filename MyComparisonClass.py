@@ -283,3 +283,75 @@ class Comparison:
         plt.legend()
         print('plot9g, Nd=',Nd,'Ns=',Ns)
 
+    def plot10g(self,err):
+# Include errors
+        d = self.datads
+        s = self.simds
+        Nd = d.PeriodU(0).size
+        Ns = s.PeriodU(0).size
+
+        errU = np.empty(Nd)
+        for i in range(0,Nd):
+            errU[i] = err 
+        plt.figure(310)
+# use generic x-axes based on size of array
+        errorbar(d.genx(Nd),d.PeriodU(0),color='cyan',linewidth=2, label=r'Data Period (U0)')
+        errorbar(d.genx(Nd),d.PeriodU(0),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.PeriodU(0),color='magenta',linewidth=2, label=r' Sim Period (U0)')
+
+        errorbar(d.genx(Nd),d.PeriodU(1),color='blue',linewidth=2, label=r'Data Period (U1)')
+        errorbar(d.genx(Nd),d.PeriodU(1),errU,fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.PeriodU(1),color='red',linewidth=2, label=r' Sim Period (U1)')
+
+        errorbar(d.genx(Nd),d.PeriodU(2),color='green',linewidth=2, label=r'Data Period (U2)')
+        errorbar(d.genx(Nd),d.PeriodU(2),errU,fmt="o",color='green',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.PeriodU(2),color='black',linewidth=2, label=r' Sim Period (U2)')
+
+        errorbar(d.genx(Nd),d.PeriodU(3),color='orange',linewidth=2, label=r'Data Period (U3)')
+        errorbar(d.genx(Nd),d.PeriodU(3),errU,fmt="o",color='orange',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.PeriodU(3),color='grey',linewidth=2, label=r' Sim Period (U3)')
+
+        title('Run 76')
+        xlabel('Measurement Number')
+        ylabel('Period [s]')
+        plt.grid(True)
+        plt.legend()
+        print('plot10g, Nd=',Nd,'Ns=',Ns)
+
+    def plot11g(self,err):
+# Include errors
+        d = self.datads
+        s = self.simds
+        Nd = d.PeriodD(0).size
+        Ns = s.PeriodD(0).size
+
+        errU = np.empty(Nd)
+        for i in range(0,Nd):
+            errU[i] = err 
+        plt.figure(311)
+# use generic x-axes based on size of array
+        errorbar(d.genx(Nd),d.PeriodD(0),color='cyan',linewidth=2, label=r'Data Period (D0)')
+        errorbar(d.genx(Nd),d.PeriodD(0),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.PeriodD(0),color='magenta',linewidth=2, label=r' Sim Period (D0)')
+
+        errorbar(d.genx(Nd),d.PeriodD(1),color='blue',linewidth=2, label=r'Data Period (D1)')
+        errorbar(d.genx(Nd),d.PeriodD(1),errU,fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.PeriodD(1),color='red',linewidth=2, label=r' Sim Period (D1)')
+
+        errorbar(d.genx(Nd),d.PeriodD(2),color='green',linewidth=2, label=r'Data Period (D2)')
+        errorbar(d.genx(Nd),d.PeriodD(2),errU,fmt="o",color='green',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.PeriodD(2),color='black',linewidth=2, label=r' Sim Period (D2)')
+
+        errorbar(d.genx(Nd),d.PeriodD(3),color='orange',linewidth=2, label=r'Data Period (D3)')
+        errorbar(d.genx(Nd),d.PeriodD(3),errU,fmt="o",color='orange',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.PeriodD(3),color='grey',linewidth=2, label=r' Sim Period (D3)')
+
+        title('Run 76')
+        xlabel('Measurement Number')
+        ylabel('Period [s]')
+        plt.grid(True)
+        plt.legend()
+        print('plot11g, Nd=',Nd,'Ns=',Ns)
+
+
+
