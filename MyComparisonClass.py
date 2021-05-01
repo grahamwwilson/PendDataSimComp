@@ -90,29 +90,6 @@ class Comparison:
         plt.legend()
         print('plot1e, N=',N)
 
-    def plot2e(self,err):
-# Include errors
-        d = self.datads
-        s = self.simds
-        QvalueU = d.QvalueU()
-        N = QvalueU.size
-        errU = np.empty(N)
-        for i in range(0,N):
-            errU[i] = err 
-        plt.figure(102)
-        errorbar(d.tvalueU(),d.QvalueU(),color='cyan',linewidth=2, label=r'Data Q-value (U)')
-        errorbar(d.tvalueU(),d.QvalueU(),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
-        errorbar(s.tvalueU(),s.QvalueU(),color='magenta',linewidth=2, label=r'Sim Q-value (U)')
-        errorbar(d.tvalueD(),d.QvalueD(),color='blue',linewidth=2, label=r'Data Q-value (D)')
-        errorbar(d.tvalueD(),d.QvalueD(),errU,fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
-        errorbar(s.tvalueD(),s.QvalueD(),color='red',linewidth=2, label=r'Sim Q-value (D)')
-        title('Run 76')
-        xlabel('Time [s]')
-        ylabel('Q-value')
-        plt.grid(True)
-        plt.legend()
-        print('plot2e, N=',N)
-
     def plot3e(self,err):
 # Include errors
         d = self.datads
@@ -136,104 +113,115 @@ class Comparison:
         plt.legend()
         print('plot3e, N=',N)
 
-    def plot4e(self,err):
+    def plot4g(self,err):
 # Include errors
         d = self.datads
         s = self.simds
-        QvalueU = d.QvalueU()
-        N = QvalueU.size
-        errU = np.empty(N)
-        for i in range(0,N):
+        Nd = d.QvalueU().size
+        Ns = s.QvalueU().size
+
+        errU = np.empty(Nd)
+        for i in range(0,Nd):
             errU[i] = err 
-        plt.figure(104)
-        errorbar(d.evalueU(),d.QvalueU(),color='cyan',linewidth=2, label=r'Data Q-value (U)')
-        errorbar(d.evalueU(),d.QvalueU(),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
-        errorbar(s.evalueU(),s.QvalueU(),color='magenta',linewidth=2, label=r'Sim Q-value (U)')
-        errorbar(d.evalueD(),d.QvalueD(),color='blue',linewidth=2, label=r'Data Q-value (D)')
-        errorbar(d.evalueD(),d.QvalueD(),errU,fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
-        errorbar(s.evalueD(),s.QvalueD(),color='red',linewidth=2, label=r'Sim Q-value (D)')
+        plt.figure(304)
+# use generic x-axes based on size of array
+        errorbar(d.genx(Nd),d.QvalueU(),color='cyan',linewidth=2, label=r'Data Q-Value (U)')
+        errorbar(d.genx(Nd),d.QvalueU(),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.QvalueU(),color='magenta',linewidth=2, label=r' Sim Q-Value (U)')
+        errorbar(d.genx(Nd),d.QvalueD(),color='blue',linewidth=2, label=r'Data Q-Value (D)')
+        errorbar(d.genx(Nd),d.QvalueD(),errU,fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.QvalueD(),color='red',linewidth=2, label=r' Sim Q-Value (D)')
         title('Run 76')
-        xlabel('Event Number')
-        ylabel('Q-value')
+        xlabel('Measurement Number')
+        ylabel('Q-Value')
         plt.grid(True)
         plt.legend()
-        print('plot4e, N=',N)
+        print('plot4g, Nd=',Nd,'Ns=',Ns)
 
     def plot5f(self,err):
 # Include errors
         d = self.datads
         s = self.simds
-        N = d.deltatDU().size
-        print('plot5f, N=',N)
-        errU = np.empty(N)
-        for i in range(0,N):
+        Nd = d.deltatDU().size
+        Ns = s.deltatDU().size
+
+        print('plot5f, Nd=',Nd,'Ns=',Ns)
+        errU = np.empty(Nd)
+        for i in range(0,Nd):
             errU[i] = err 
         plt.figure(205)
-        errorbar(d.evalueU(),d.deltatDU(),color='green',linewidth=2, label=r'Data D/U Time Difference')
-        errorbar(d.evalueU(),d.deltatDU(),errU,fmt="o",color='green',solid_capstyle='projecting',capsize=0,markersize=4)
-        errorbar(s.evalueU(),s.deltatDU(),color='black',linewidth=2, label=r'Sim D/U Time Difference')
+        errorbar(d.genx(Nd),d.deltatDU(),color='green',linewidth=2, label=r'Data D/U Time Difference')
+        errorbar(d.genx(Nd),d.deltatDU(),errU,fmt="o",color='green',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.deltatDU(),color='black',linewidth=2, label=r'Sim D/U Time Difference')
         title('Run 76')
-        xlabel('Event Number')
+        xlabel('Measurement Number')
         ylabel('D/U Time Difference [s]')
         plt.grid(True)
         plt.legend()
 
-    def plot6f(self,err):
+    def plot6g(self,err):
 # Include errors
         d = self.datads
         s = self.simds
-        N = d.tdiffU().size
-        errU = np.empty(N)
-        for i in range(0,N):
+        Nd = d.tdiffU().size
+        Ns = s.tdiffU().size
+
+        errU = np.empty(Nd)
+        for i in range(0,Nd):
             errU[i] = err 
-        plt.figure(206)
-        errorbar(d.evalueUU(),d.tdiffU(),color='cyan',linewidth=2, label=r'Data Extremum Time Difference (U)')
-        errorbar(d.evalueUU(),d.tdiffU(),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
-        errorbar(s.evalueUU(),s.tdiffU(),color='magenta',linewidth=2, label=r'Sim Extremum Time Difference (U)')
+        plt.figure(306)
+# use generic x-axes based on size of array
+        errorbar(d.genx(Nd),d.tdiffU(),color='cyan',linewidth=2, label=r'Data Extremum Time Difference (U)')
+        errorbar(d.genx(Nd),d.tdiffU(),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.tdiffU(),color='magenta',linewidth=2, label=r' Sim Extremum Time Difference (U)')
         title('Run 76')
-        xlabel('Event Number')
+        xlabel('Measurement Number')
         ylabel('Extremum Time Difference [s]')
         plt.grid(True)
         plt.legend()
-        print('plot6f, N=',N)
+        print('plot6g, Nd=',Nd,'Ns=',Ns)
 
     def plot7f(self,err):
 # Include errors
         d = self.datads
         s = self.simds
-        N = d.AhperiodU().size
-        errU = np.empty(N)
-        for i in range(0,N):
+        Nd = d.AhperiodU().size
+        Ns = s.AhperiodU().size
+
+        errU = np.empty(Nd)
+        for i in range(0,Nd):
             errU[i] = err 
         plt.figure(207)
-        errorbar(d.evalueUU(),d.AhperiodU(),color='cyan',linewidth=2, label=r'Data Half-Period Asymmetry (U)')
-        errorbar(d.evalueUU(),d.AhperiodU(),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
-        errorbar(s.evalueUU(),s.AhperiodU(),color='magenta',linewidth=2, label=r'Sim Half-Period Asymmetry (U)')
+        errorbar(d.genx(Nd),d.AhperiodU(),color='cyan',linewidth=2, label=r'Data Half-Period Asymmetry (U)')
+        errorbar(d.genx(Nd),d.AhperiodU(),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.AhperiodU(),color='magenta',linewidth=2, label=r'Sim Half-Period Asymmetry (U)')
         title('Run 76')
-        xlabel('Event Number')
+        xlabel('Measurement Number')
         ylabel('Half-Period Asymmetry [%]')
         plt.grid(True)
         plt.legend()
-        print('plot7f, N=',N)
+        print('plot7f, Nd=',Nd,'Ns=',Ns)
 
     def plot8f(self,err):
 # Include errors
         d = self.datads
         s = self.simds
-        N = d.AhperiodD().size
-        errD = np.empty(N)
-        for i in range(0,N):
+        Nd = d.AhperiodD().size
+        Ns = s.AhperiodD().size
+
+        errD = np.empty(Nd)
+        for i in range(0,Nd):
             errD[i] = err 
         plt.figure(208)
-        errorbar(d.evalueDD(),d.AhperiodD(),color='blue',linewidth=2, label=r'Data Half-Period Asymmetry (D)')
-        errorbar(d.evalueDD(),d.AhperiodD(),errD,fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
-        errorbar(s.evalueDD(),s.AhperiodD(),color='red',linewidth=2, label=r'Sim Half-Period Asymmetry (D)')
+        errorbar(d.genx(Nd),d.AhperiodD(),color='blue',linewidth=2, label=r'Data Half-Period Asymmetry (D)')
+        errorbar(d.genx(Nd),d.AhperiodD(),errD,fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.AhperiodD(),color='red',linewidth=2, label=r'Sim Half-Period Asymmetry (D)')
         title('Run 76')
-        xlabel('Event Number')
+        xlabel('Measurement Number')
         ylabel('Half-Period Asymmetry [%]')
         plt.grid(True)
         plt.legend()
-        print('plot8f, N=',N)
+        print('plot8f, Nd=',Nd,'Ns=',Ns)
 
     def plot9e(self,err):
 # Include errors
@@ -353,5 +341,151 @@ class Comparison:
         plt.legend()
         print('plot11g, Nd=',Nd,'Ns=',Ns)
 
+    def plot12g(self,err):
+# Include errors
+        d = self.datads
+        s = self.simds
+        Nd = d.PPeriodD(0).size
+        Ns = s.PPeriodD(0).size
 
+        errU = np.empty(Nd)
+        for i in range(0,Nd):
+            errU[i] = err 
+        plt.figure(312)
+# use generic x-axes based on size of array
+        errorbar(d.genx(Nd),d.PPeriodD(0),color='cyan',linewidth=2, label=r'Data PPeriod (D0)')
+        errorbar(d.genx(Nd),d.PPeriodD(0),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.PPeriodD(0),color='magenta',linewidth=2, label=r' Sim PPeriod (D0)')
+
+        errorbar(d.genx(Nd),d.PPeriodD(1),color='blue',linewidth=2, label=r'Data PPeriod (D1)')
+        errorbar(d.genx(Nd),d.PPeriodD(1),errU,fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.PPeriodD(1),color='red',linewidth=2, label=r' Sim PPeriod (D1)')
+
+        errorbar(d.genx(Nd),d.PPeriodU(0),color='green',linewidth=2, label=r'Data PPeriod (U0)')
+        errorbar(d.genx(Nd),d.PPeriodU(0),errU,fmt="o",color='green',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.PPeriodU(0),color='black',linewidth=2, label=r' Sim PPeriod (U0)')
+
+        errorbar(d.genx(Nd),d.PPeriodU(1),color='orange',linewidth=2, label=r'Data PPeriod (U1)')
+        errorbar(d.genx(Nd),d.PPeriodU(1),errU,fmt="o",color='orange',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.PPeriodU(1),color='grey',linewidth=2, label=r' Sim PPeriod (U1)')
+
+        title('Run 76')
+        xlabel('Measurement Number')
+        ylabel('Period [s]')
+        plt.grid(True)
+        plt.legend()
+        print('plot12g, Nd=',Nd,'Ns=',Ns)
+
+    def plot13h(self,err):
+# Include errors
+        d = self.datads
+        s = self.simds
+        Nd = d.APeriodU(0,1).size
+        Ns = s.APeriodU(0,1).size
+
+        errU = np.empty(Nd)
+        for i in range(0,Nd):
+            errU[i] = err 
+        plt.figure(313)
+# use generic x-axes based on size of array
+        errorbar(d.genx(Nd),d.APeriodU(0,1),color='cyan',linewidth=2, label=r'Data APeriod (U-01)')
+        errorbar(d.genx(Nd),d.APeriodU(0,1),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.APeriodU(0,1),color='magenta',linewidth=2, label=r' Sim APeriod (U-01)')
+
+        errorbar(d.genx(Nd),d.APeriodU(0,2),color='blue',linewidth=2, label=r'Data APeriod (U-02)')
+        errorbar(d.genx(Nd),d.APeriodU(0,2),errU,fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.APeriodU(0,2),color='red',linewidth=2, label=r' Sim APeriod (U-02)')
+
+        errorbar(d.genx(Nd),d.APeriodU(0,3),color='green',linewidth=2, label=r'Data APeriod (U-03)')
+        errorbar(d.genx(Nd),d.APeriodU(0,3),errU,fmt="o",color='green',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.APeriodU(0,3),color='black',linewidth=2, label=r' Sim APeriod (U-03)')
+
+        errorbar(d.genx(Nd),d.APeriodU(1,2),color='orange',linewidth=2, label=r'Data APeriod (U-12)')
+        errorbar(d.genx(Nd),d.APeriodU(1,2),errU,fmt="o",color='orange',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.APeriodU(1,2),color='grey',linewidth=2, label=r' Sim APeriod (U-12)')
+
+        errorbar(d.genx(Nd),d.APeriodU(1,3),color='olive',linewidth=2, label=r'Data APeriod (U-13)')
+        errorbar(d.genx(Nd),d.APeriodU(1,3),errU,fmt="o",color='olive',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.APeriodU(1,3),color='yellow',linewidth=2, label=r' Sim APeriod (U-13)')
+
+        errorbar(d.genx(Nd),d.APeriodU(2,3),color='brown',linewidth=2, label=r'Data APeriod (U-23)')
+        errorbar(d.genx(Nd),d.APeriodU(2,3),errU,fmt="o",color='brown',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.APeriodU(2,3),color='purple',linewidth=2, label=r' Sim APeriod (U-23)')
+
+        title('Run 76')
+        xlabel('Measurement Number')
+        ylabel('Period Asymmetry [%]')
+        plt.grid(True)
+        plt.legend()
+        print('plot13h, Nd=',Nd,'Ns=',Ns)
+
+    def plot14h(self,err):
+# Include errors
+        d = self.datads
+        s = self.simds
+        Nd = d.APeriodD(0,1).size
+        Ns = s.APeriodD(0,1).size
+
+        errU = np.empty(Nd)
+        for i in range(0,Nd):
+            errU[i] = err 
+        plt.figure(314)
+# use generic x-axes based on size of array
+        errorbar(d.genx(Nd),d.APeriodD(0,1),color='cyan',linewidth=2, label=r'Data APeriod (D-01)')
+        errorbar(d.genx(Nd),d.APeriodD(0,1),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.APeriodD(0,1),color='magenta',linewidth=2, label=r' Sim APeriod (D-01)')
+
+        errorbar(d.genx(Nd),d.APeriodD(0,2),color='blue',linewidth=2, label=r'Data APeriod (D-02)')
+        errorbar(d.genx(Nd),d.APeriodD(0,2),errU,fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.APeriodD(0,2),color='red',linewidth=2, label=r' Sim APeriod (D-02)')
+
+        errorbar(d.genx(Nd),d.APeriodD(0,3),color='green',linewidth=2, label=r'Data APeriod (D-03)')
+        errorbar(d.genx(Nd),d.APeriodD(0,3),errU,fmt="o",color='green',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.APeriodD(0,3),color='black',linewidth=2, label=r' Sim APeriod (D-03)')
+
+        errorbar(d.genx(Nd),d.APeriodD(1,2),color='orange',linewidth=2, label=r'Data APeriod (D-12)')
+        errorbar(d.genx(Nd),d.APeriodD(1,2),errU,fmt="o",color='orange',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.APeriodD(1,2),color='grey',linewidth=2, label=r' Sim APeriod (D-12)')
+
+        errorbar(d.genx(Nd),d.APeriodD(1,3),color='olive',linewidth=2, label=r'Data APeriod (D-13)')
+        errorbar(d.genx(Nd),d.APeriodD(1,3),errU,fmt="o",color='olive',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.APeriodD(1,3),color='yellow',linewidth=2, label=r' Sim APeriod (D-13)')
+
+        errorbar(d.genx(Nd),d.APeriodD(2,3),color='brown',linewidth=2, label=r'Data APeriod (D-23)')
+        errorbar(d.genx(Nd),d.APeriodD(2,3),errU,fmt="o",color='brown',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.APeriodD(2,3),color='purple',linewidth=2, label=r' Sim APeriod (D-23)')
+
+        title('Run 76')
+        xlabel('Measurement Number')
+        ylabel('Period Asymmetry [%]')
+        plt.grid(True)
+        plt.legend()
+        print('plot14h, Nd=',Nd,'Ns=',Ns)
+
+    def plot15g(self,err):
+# Include errors
+        d = self.datads
+        s = self.simds
+        Nd = d.APeriodDU(0).size
+        Ns = s.APeriodDU(0).size
+
+        errU = np.empty(Nd)
+        for i in range(0,Nd):
+            errU[i] = err 
+        plt.figure(315)
+# use generic x-axes based on size of array
+ 
+        errorbar(d.genx(Nd),d.APeriodDU(1),color='cyan',linewidth=2, label=r'Data D/U Period Asymmetry 1')
+        errorbar(d.genx(Nd),d.APeriodDU(1),errU,fmt="o",color='cyan',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.APeriodDU(1),color='magenta',linewidth=2, label=r' Sim D/U Period Asymmetry 1')
+        errorbar(d.genx(Nd),d.APeriodDU(0),color='blue',linewidth=2, label=r'Data D/U Period Asymmetry 0')
+        errorbar(d.genx(Nd),d.APeriodDU(0),errU,fmt="o",color='blue',solid_capstyle='projecting',capsize=0,markersize=4)
+        errorbar(s.genx(Ns),s.APeriodDU(0),color='red',linewidth=2, label=r' Sim D/U Period Asymmetry 0')
+
+        title('Run 76')
+        xlabel('Measurement Number')
+        ylabel('D/U Period Asymmetry [%]')
+        plt.grid(True)
+        plt.legend()
+        print('plot15g, Nd=',Nd,'Ns=',Ns)
 

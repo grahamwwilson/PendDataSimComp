@@ -70,7 +70,9 @@ DTCLOCKD = 1.0/5.013290e6         # Same as simulation
 DTCLOCKU = 1.00057665*DTCLOCKD    # Same as simulation
 CLOCK_OFFSET_D = 137918728
 DTUD = 19000 # 3.8 ms offset
-CLOCK_OFFSET_U = int(CLOCK_OFFSET_D*DTCLOCKD/DTCLOCKU) - DTUD 
+CLOCK_OFFSET_U = int(CLOCK_OFFSET_D*DTCLOCKD/DTCLOCKU) - DTUD
+print('CLOCK_OFFSET_U ',CLOCK_OFFSET_U)
+print('CLOCK_OFFSET_D ',CLOCK_OFFSET_D) 
 sim_type_U = np.delete(sim_type, sim_dlist)
 sim_event_U = np.delete(sim_event, sim_dlist)
 sim_clockticks_U = np.delete(sim_clockticks, sim_dlist)
@@ -211,9 +213,9 @@ for i in range(0, data_type_D.size//4):
 
 #print(data_tvalue_D-data_tvalue_U)
 #print(sim_tvalue_D-sim_tvalue_U)
-print(data_Q)
-print(sim_Q)
-print(data_Q-sim_Q)
+#print(data_Q)
+#print(sim_Q)
+#print(data_Q-sim_Q)
 
 # Plot the data with assigned errors
 plt.figure(1)  
