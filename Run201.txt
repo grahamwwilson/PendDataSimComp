@@ -7,3 +7,6 @@ Quarter period[s] iphase= 0 mean= 0.011062011356045417 rms= 2.3123804292169426e-
 Quarter period[s] iphase= 1 mean= 0.011150719772878789 rms= 2.5772960126101515e-06
 Quarter period[s] iphase= 2 mean= 0.01106613479339609 rms= 2.281504539283226e-06
 Quarter period[s] iphase= 3 mean= 0.011163420746254952 rms= 2.100296104984794e-06
+
+(Note: results from lab tests 
+ with old setup were summarized in an E-mail on 4-24-2021 at 6:44 PM)
