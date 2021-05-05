@@ -63,8 +63,8 @@ c.plot15g(1.0e-4)
 # TODO add 2-d plots a la Kostov
 
 plt.show()
-#print('data.deltatDU',data.deltatDU())
-#print('sim.deltatDU',sim.deltatDU())
+print('data.deltatDU',data.deltatDU())
+print('sim.deltatDU',sim.deltatDU())
 
 #print(data.PeriodU(0))
 
